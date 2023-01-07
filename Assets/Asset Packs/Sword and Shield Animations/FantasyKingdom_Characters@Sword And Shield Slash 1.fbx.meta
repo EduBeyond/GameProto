@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 080e0039f8fcd4d14a3e2184f8a8b493
+guid: ce7bbd1ca9d849a45987e6982ecc87bd
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -75,14 +75,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 53b27700e7a72774bacc38de5a5604b3
-  - 818594b142d06924b984c2144123e80b
-  - ce7bbd1ca9d849a45987e6982ecc87bd
-  - 66f0a07a03e6ad245b706fac8ba7fbd8
-  - 36f5c1833a440ed47b1e1a59ff2cd2a8
-  - 5c940ac7c02d92849bb56c7d6c7e8ddb
-  - 842f8b13c2bcf7c4692130a476f2b280
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -96,7 +89,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: SM_Chr_Soldier_Male_01
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -104,7 +97,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
