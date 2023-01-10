@@ -25,7 +25,7 @@ public class shipEngineStart : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-        Spaceship.Play("shipHyperspace", 0, 4.0f);
+        Spaceship.Play("cruiserHyperspace", 0, 4.0f);
         LevelLoader.Play("outro_crossfade", 0, 4.0f);
         StartCoroutine(WaitForSceneLoad());
         }
