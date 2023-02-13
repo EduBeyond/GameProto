@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_2019_4_OR_NEWER && ENABLE_INPUT_SYSTEM
 using KeyCode = UnityEngine.InputSystem.Key;
@@ -40,22 +41,25 @@ public class QTEKey
 public class QTEUI
 {
     public GameObject eventUI;
-    public Text eventText;
-    public Text passText;
-    public Text eventTimerText;
+    public TMP_Text eventText;
+    public TMP_Text passText;
+    public TMP_Text eventTimerText;
     public Image eventTimerImage;
 }
 
-public class QTEEvent : MonoBehaviour
+public class QTEEvent : ScriptableObject
 {
     [Header("Event settings")]
     public List<QTEKey> keys = new List<QTEKey>();
     public QTETimeType timeType;
-    public float time = 3f;
+    public float time;
     public bool failOnWrongKey;
     public QTEPressType pressType;
     [Header("UI")]
     public QTEUI keyboardUI;
+    public TMP_Text passText;
+    public TMP_Text timerText;
+    public List<string> fragmentsList = new List<string>();
 
     [Header("Event actions")]
     public UnityEvent onStart;

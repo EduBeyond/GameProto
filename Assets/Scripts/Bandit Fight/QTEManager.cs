@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 #if UNITY_2019_4_OR_NEWER && ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -23,6 +24,8 @@ public class QTEManager : MonoBehaviour
     public Slider hb;
     public Slider ehb;
     public bool submitted;
+    public GameObject player;
+    public GameObject enemy;
 
     [HideInInspector]
     public bool isEventStarted;
@@ -43,7 +46,7 @@ public class QTEManager : MonoBehaviour
 
     public void Start()
     {
-        submitButton.onClick.AddListener(submit);
+        submitButton.onClick.AddListener(delegate { submit(submitButton.GetComponent<CurQTE>().qte); });
     }
 
     protected void Update()
@@ -67,6 +70,13 @@ public class QTEManager : MonoBehaviour
 
     public void startEvent(QTEEvent eventScriptable)
     {
+        FightOutcomes outcome = player.GetComponent<FightOutcomes>();
+        outcome.initiated = true;
+        outcome.dodged = true;
+        outcome.hit = false;
+        outcome.ip = true;
+        outcome.over = false;
+        Debug.Log(eventScriptable.passText);
         foreach (Transform child in fragPanel)
         {
             Destroy(child.gameObject);
@@ -81,11 +91,10 @@ public class QTEManager : MonoBehaviour
         solList.Clear();
 
 
+
+
+
         submitted = false;
-        List<string> ls = new List<string>();
-        ls.Add("When I got home the house was empty,");
-        ls.Add("so");
-        ls.Add("I called Mom to see where everyone was.");
 
         //generateQTE(ls, parent);
 
@@ -97,7 +106,7 @@ public class QTEManager : MonoBehaviour
         }
 #endif
         eventData = eventScriptable;
-        resetDisplay(eventData.keyboardUI.passText);
+        resetDisplay(eventData.passText);
         keys = new List<QTEKey>(eventData.keys);
         if (eventData.onStart != null)
         {
@@ -107,7 +116,7 @@ public class QTEManager : MonoBehaviour
         isEnded = false;
         isFail = false;
         isPaused = false;
-        rememberTimeScale = Time.timeScale;
+        rememberTimeScale = 1;
         switch (eventScriptable.timeType)
         {
             case QTETimeType.Slow:
@@ -119,31 +128,30 @@ public class QTEManager : MonoBehaviour
         }
         currentTime = eventData.time;
         smoothTimeUpdate = currentTime;
-        List<Button> blist = setupGUI(ls, fragPanel);
+        List<Button> blist = setupGUI(eventScriptable.fragmentsList, fragPanel);
         StartCoroutine(countDown());
     }
 
     private IEnumerator countDown()
     {
-        isEventStarted = true;
-        while (currentTime > 0 && isEventStarted && !isEnded)
+        while (currentTime > 0 )
         {
-            if (eventData.keyboardUI.eventTimerText != null)
-            {
-                eventData.keyboardUI.eventTimerText.text = currentTime.ToString();
-            }
-            currentTime--;
-            yield return new WaitWhile(() => isPaused);
+
+            eventData.keyboardUI.eventTimerText.text = currentTime.ToString();
+            currentTime=currentTime-1f;
             yield return new WaitForSecondsRealtime(1f);
         }
 
 
-        if (!isAllButtonsPressed && !isEnded && !submitted)
-        {
-            //fail function here
-            isFail = true;
-            doFinally();
-        }
+        doFinally();
+    }
+
+    protected void doFinally()
+    {
+        isEnded = true;
+        isEventStarted = false;
+        Time.timeScale = rememberTimeScale;
+        eventData = null;
     }
 
     public void setHealth(Slider s, int health)
@@ -151,18 +159,9 @@ public class QTEManager : MonoBehaviour
         s.value = health;
     }
 
-    public void submit()
+    public void submit(QTEEvent qte)
     {
         submitted = true;
-        foreach (int i in ansList)
-        {
-            Debug.Log(i);
-        }
-
-        foreach (int i in solList)
-        {
-            Debug.Log(i);
-        }
 
         bool correctAns = true;
 
@@ -176,49 +175,44 @@ public class QTEManager : MonoBehaviour
             if (ansList[i] != solList[i]) { correctAns = false; }
         }
 
+        FightOutcomes outcome = player.GetComponent<FightOutcomes>();
+
         if (correctAns)
         {
-            displayPass(eventData.keyboardUI.passText);
+            displayPass(qte.passText);
+
+            //if dodging
+            if (outcome.cur == 0) { outcome.dodged = true; }
+            //if initiating
+            else { outcome.initiated = true; }
             setHealth(ehb, (int)ehb.GetComponent<Slider>().value - 1);
+            outcome.ip = false;
+            if (outcome.playerAtk == 0)
+            {
+                outcome.enemyReaction = 0;
+            }
+            outcome.over = true;
+            doFinally();
             return;
         }
 
-        displayFail(eventData.keyboardUI.passText);
+        Debug.Log("p");
+        //if failed dodging
+        if (outcome.cur == 0) { outcome.dodged = false; }
+        //if failed initiating
+        if (outcome.cur == 1) {
+            outcome.initiated = false; 
+        }
+        outcome.hit = true;
+        outcome.ip = false;
+        displayFail(qte.passText);
+        player.GetComponent<FightOutcomes>().hit = true;
+        outcome.over = true;
+        doFinally();
         setHealth(hb, (int)hb.GetComponent<Slider>().value - 1);
     }
 
-    protected void doFinally()
-    {
-        if (keys.Count == 0)
-        {
-            isAllButtonsPressed = true;
-        }
-        isEnded = true;
-        isEventStarted = false;
-        Time.timeScale = rememberTimeScale;
-        var ui = getUI();
-        /*
-        if (ui.eventUI != null)
-        {
-            ui.eventUI.SetActive(false);
-        }
-        */
-        if (eventData.onEnd != null)
-        {
-            eventData.onEnd.Invoke();
-        }
-        if (eventData.onFail != null && isFail)
-        {
-            displayFail(eventData.keyboardUI.passText);
-            eventData.onFail.Invoke();
-        }
-        if (eventData.onSuccess != null && isAllButtonsPressed)
-        {
-            displayPass(eventData.keyboardUI.passText);
-            eventData.onSuccess.Invoke();
-        }
-        eventData = null;
-    }
+
 
     protected void OnGUI()
     {
@@ -291,10 +285,10 @@ public class QTEManager : MonoBehaviour
         {
             Button b = Instantiate(butPrefab, new Vector3(370, 130, 0), Quaternion.identity);
             b.transform.SetParent(parent);
-            b.GetComponentInChildren<Text>().text = fragment;
+            b.GetComponentInChildren<TMP_Text>().text = fragment;
             RectTransform bRectTrans = b.GetComponent<RectTransform>();
             b.GetComponent<RectTransform>().sizeDelta = bRectTrans.sizeDelta + new Vector2(10.0f, 0.0f);
-            b.GetComponent<AnsButton>().code = answerDict[b.GetComponentInChildren<Text>().text];
+            b.GetComponent<AnsButton>().code = answerDict[b.GetComponentInChildren<TMP_Text>().text];
             b.onClick.AddListener(delegate { fragClicked(b); });
             blist.Add(b);
         }
@@ -329,19 +323,19 @@ public class QTEManager : MonoBehaviour
         return ui;
     }
 
-    public void displayPass(Text passBox)
+    public void displayPass(TMP_Text passBox)
     {
         passBox.text = "passed";
     }
 
-    public void displayFail(Text passBox)
+    public void displayFail(TMP_Text passBox)
     {
         passBox.text = "failed";
     }
 
-    public void resetDisplay(Text passBox)
+    public void resetDisplay(TMP_Text passBox)
     {
-        passBox.text = "";
+        passBox.text = ""; 
     }
 
     public static void Shuffle<T>(IList<T> list)
