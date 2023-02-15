@@ -1,0 +1,147 @@
+Last login: Tue Jan 24 19:51:08 on ttys000
+enzopassarini@Enzos-MacBook-Air ~ % cd desktop
+enzopassarini@Enzos-MacBook-Air desktop % cd EduBeyond
+enzopassarini@Enzos-MacBook-Air EduBeyond % cd English-Game
+enzopassarini@Enzos-MacBook-Air English-Game % git add -A
+git commit
+enzopassarini@Enzos-MacBook-Air English-Game % git commit
+[main 19e6e580]  made the cave
+ Committer: Enzo Passarini <enzopassarini@Enzos-MacBook-Air.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 15 files changed, 1016 insertions(+), 219 deletions(-)
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/.DS_Store
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/Terrain_Assets/.DS_Store
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/Terrain_Assets/Meshes/.DS_Store
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/Terrain_Assets/Meshes/Terrain/.DS_Store
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/Terrain_Assets/Prefabs/.DS_Store
+ create mode 100644 Assets/Asset Packs/Low Poly Modular Terrain Pack/Terrain_Assets/Prefabs/Terrain/.DS_Store
+ create mode 100644 Assets/Asset Packs/PolygonSciFiSpace/.DS_Store
+ create mode 100644 Assets/Scenes/CaveLevel.unity
+ create mode 100644 Assets/Scenes/CaveLevel.unity.meta
+enzopassarini@Enzos-MacBook-Air English-Game % git push
+Enumerating objects: 47, done.
+Counting objects: 100% (47/47), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (29/29), done.
+Writing objects: 100% (29/29), 12.45 KiB | 6.22 MiB/s, done.
+Total 29 (delta 25), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (25/25), completed with 18 local objects.
+To https://github.com/EduBeyond/GameProto.git
+   2bc3f10b..19e6e580  main -> main
+enzopassarini@Enzos-MacBook-Air English-Game % git add -A
+enzopassarini@Enzos-MacBook-Air English-Game % git commit
+[main 23efcb2d] added the actual cave level
+ Committer: Enzo Passarini <enzopassarini@dhcp-206-87-126-50.ubcsecure.wireless.ubc.ca>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 247303 insertions(+), 32 deletions(-)
+ create mode 100644 Assets/Scenes/Village 2.unity
+ create mode 100644 Assets/Scenes/Village 2.unity.meta
+enzopassarini@Enzos-MacBook-Air English-Game % git push
+To https://github.com/EduBeyond/GameProto.git
+ ! [rejected]          main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/EduBeyond/GameProto.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+enzopassarini@Enzos-MacBook-Air English-Game % git pull
+remote: Enumerating objects: 53, done.
+remote: Counting objects: 100% (53/53), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 33 (delta 19), reused 33 (delta 19), pack-reused 0
+Unpacking objects: 100% (33/33), 23.80 KiB | 111.00 KiB/s, done.
+From https://github.com/EduBeyond/GameProto
+   19e6e580..76370d44  main       -> origin/main
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+enzopassarini@Enzos-MacBook-Air English-Game % git add -A
+enzopassarini@Enzos-MacBook-Air English-Game % git commit
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 1 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+nothing to commit, working tree clean
+enzopassarini@Enzos-MacBook-Air English-Game % git add -A
+enzopassarini@Enzos-MacBook-Air English-Game % git commit
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 1 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+nothing to commit, working tree clean
+enzopassarini@Enzos-MacBook-Air English-Game % git add -A
+enzopassarini@Enzos-MacBook-Air English-Game % git commit
+On branch main
+Your branch and 'origin/main' have diverged,
+and have 1 and 1 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+nothing to commit, working tree clean
+enzopassarini@Enzos-MacBook-Air English-Game % ls
+Assembly-CSharp.csproj	Logs			UserSettings
+Assets			Packages		obj
+English-Game.sln	ProjectSettings		test.app
+Library			Temp
+enzopassarini@Enzos-MacBook-Air English-Game % nano hehe.txt
+
+  UW PICO 5.09                          File: hehe.txt                          Modified  
+
+poop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^G Get Help    ^O WriteOut    ^R Read File   ^Y Prev Pg     ^K Cut Text    ^C Cur Pos     
+^X Exit        ^J Justify     ^W Where is    ^V Next Pg     ^U UnCut Text  ^T To Spell   
