@@ -165,14 +165,22 @@ public class QTEManager : MonoBehaviour
 
         bool correctAns = true;
 
-        for (int i = 0; i < solList.Count; i++)
+        foreach (int item in ansList)
         {
-            if (ansList.Count != solList.Count)
+            if (!solList.Contains(item))
             {
                 correctAns = false;
-                break;
             }
-            if (ansList[i] != solList[i]) { correctAns = false; }
+        }
+
+        foreach (int item in solList)
+        {
+            print("sol: " + item);
+        }
+
+        foreach (int item in ansList)
+        {
+            print("ans: " + item);
         }
 
         FightOutcomes outcome = player.GetComponent<FightOutcomes>();
@@ -196,7 +204,6 @@ public class QTEManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("p");
         //if failed dodging
         if (outcome.cur == 0) { outcome.dodged = false; }
         //if failed initiating
@@ -270,17 +277,22 @@ public class QTEManager : MonoBehaviour
 
     protected List<Button> setupGUI(List<string> fragments, Transform parent)
     {
+        foreach (Transform child in fragPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in ansPanel)
+        {
+            Destroy(child.gameObject);
+        }
         var ui = getUI();
-
         Dictionary<string, int> answerDict = new Dictionary<string, int>();
         int count = 0;
         foreach (string fragment in fragments)
         {
             answerDict.Add(fragment, count);
-            solList.Add(count);
             count++;
         }
-        Shuffle(fragments);
         foreach (string fragment in fragments)
         {
             Button b = Instantiate(butPrefab, new Vector3(370, 130, 0), Quaternion.identity);

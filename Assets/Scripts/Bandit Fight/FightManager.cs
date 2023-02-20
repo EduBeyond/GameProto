@@ -60,7 +60,10 @@ public class FightManager : MonoBehaviour
             l.Add("A");
             l.Add("B");
             l.Add("C");
-            question.GetComponent<TMP_Text>().text = GetQuestion().Item1;
+            (string, int) temp = GetQuestion();
+            question.GetComponent<TMP_Text>().text = temp.Item1;
+            manager.solList.Clear();
+            manager.solList.Add(temp.Item2);
 
             qte = GetQTEEvent(l, 5f, QTETimeType.Slow, pass.GetComponent<TMP_Text>());
 
