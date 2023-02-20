@@ -56,7 +56,8 @@ public class FightManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            outcome.ip = true;
+            l.Clear();
             l.Add("A");
             l.Add("B");
             l.Add("C");
@@ -91,10 +92,6 @@ public class FightManager : MonoBehaviour
             }
 
         }
-
-
-
-
     }
 
     IEnumerator fail()

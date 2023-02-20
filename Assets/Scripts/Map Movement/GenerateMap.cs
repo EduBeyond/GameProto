@@ -36,6 +36,22 @@ public class GenerateMap : MonoBehaviour
         bridge.left = bandit;
         bandit.down = bridge;
         bandit.right = bridge;
-    }   
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (curNode == bandit)
+            {
+                print("Enter Bandit Game");
+            }
+
+            if (curNode == cave)
+            {
+                print("Enter Cave Game");
+            }
+        }
+    }
 }
 

@@ -205,9 +205,13 @@ public class QTEManager : MonoBehaviour
         }
 
         //if failed dodging
-        if (outcome.cur == 0) { outcome.dodged = false; }
+        if (outcome.cur == 0) { 
+            outcome.dodged = false;
+            print("nle");    
+        }
         //if failed initiating
         if (outcome.cur == 1) {
+            print("nle");
             outcome.initiated = false; 
         }
         outcome.hit = true;
