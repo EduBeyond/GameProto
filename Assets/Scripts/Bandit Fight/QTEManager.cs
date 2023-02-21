@@ -26,6 +26,8 @@ public class QTEManager : MonoBehaviour
     public bool submitted;
     public GameObject player;
     public GameObject enemy;
+    public Canvas winlose;
+    public TMP_Text winlosetxt;
 
     [HideInInspector]
     public bool isEventStarted;
@@ -39,7 +41,9 @@ public class QTEManager : MonoBehaviour
     private float smoothTimeUpdate;
     private float rememberTimeScale;
     public List<int> ansList = new List<int>();
+    // solList is fucked dont use it
     public List<int> solList = new List<int>();
+    public List<int> solList2 = new List<int>();
     private List<QTEKey> keys = new List<QTEKey>();
 
     public static System.Random rng = new System.Random();
@@ -47,6 +51,8 @@ public class QTEManager : MonoBehaviour
     public void Start()
     {
         submitButton.onClick.AddListener(delegate { submit(submitButton.GetComponent<CurQTE>().qte); });
+        winlose.enabled = false;
+        winlosetxt.enabled = false;
     }
 
     protected void Update()
@@ -165,15 +171,7 @@ public class QTEManager : MonoBehaviour
 
         bool correctAns = true;
 
-        foreach (int item in ansList)
-        {
-            if (!solList.Contains(item))
-            {
-                correctAns = false;
-            }
-        }
-
-        foreach (int item in solList)
+        foreach (int item in solList2)
         {
             print("sol: " + item);
         }
@@ -181,6 +179,17 @@ public class QTEManager : MonoBehaviour
         foreach (int item in ansList)
         {
             print("ans: " + item);
+        }
+
+
+        foreach (int item in ansList)
+        {
+            print(item);
+            if (!solList2.Contains(item))
+            {
+                print("asdhlkasjlkdjslkj");
+                correctAns = false;
+            }
         }
 
         FightOutcomes outcome = player.GetComponent<FightOutcomes>();
@@ -221,6 +230,20 @@ public class QTEManager : MonoBehaviour
         outcome.over = true;
         doFinally();
         setHealth(hb, (int)hb.GetComponent<Slider>().value - 1);
+
+        print("sadhjkashaskhdskj" + ehb.value);
+        if (hb.value <= 0)
+        {
+            winlose.enabled = true;
+            winlosetxt.enabled = true;
+            winlosetxt.GetComponent<Text>().text = "You Lose!";
+        }
+        if (ehb.value <= 0)
+        {
+            winlose.enabled = true;
+            winlosetxt.enabled = true;
+            winlosetxt.GetComponent<Text>().text = "You Win!";
+        }
     }
 
 
