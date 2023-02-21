@@ -17,7 +17,7 @@ public class EnterCave : MonoBehaviour
     private static int correct;
     private static int mistakes = 0;
 
-    private List<string> answers = new List<string>{ "ph", "ff", "ft", "gh", "ge", "ch", "mb" };
+    public List<string> answers = new List<string>{ "ph", "ff", "ft", "gh", "ge", "ch", "mb" };
     [Header("Question Stuff")]
     public TMP_Text text;
     public GameObject textObject;
@@ -31,15 +31,12 @@ public class EnterCave : MonoBehaviour
         print("The correct door is: " + correct);
 
         //clones the answers on to the top of the paths
-        for (int i = 0; i < level+3; i++)
+        /*for (int i = 0; i < level+3; i++)
         {
             current = answers[Random.Range(0,answers.Count)];
             text.text = current;
             answers.Remove(current);
             GameObject clone = Instantiate(textObject);
-#if UNITY_EDITOR
-            UnityEditor.GameObjectUtility.SetParentAndAlign(clone, canvas);
-#endif
             if (level == 0)
             {
                 clone.transform.position = new Vector3((290)+(250*i), 400, 0);
@@ -52,14 +49,14 @@ public class EnterCave : MonoBehaviour
             {
                 clone.transform.position = new Vector3((90)+(230*i), 415, 0);
             }
-        }
+        }*/
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Exit")
         {
-            congrats.SetActive(true);
+            SceneManager.LoadScene("LevelSelect");
             print("Mistakes made: " + mistakes);
         }
         else if (other.tag == "Path")
