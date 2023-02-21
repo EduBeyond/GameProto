@@ -16,6 +16,8 @@ public class GenerateMap : MonoBehaviour
     public Node bandit;
     public Node curNode;
 
+    [SerializeField] private Animator Canvas1;
+
     void Start()
     {
         villageGO = GameObject.Find("Village Node");
@@ -52,12 +54,16 @@ public class GenerateMap : MonoBehaviour
         {
             if (curNode == bandit)
             {
+                Canvas1.Play("level_select_fade_out");
                 StartCoroutine(WaitForFadeLoad("BanditMap"));
+                
             }
 
             if (curNode == cave)
             {
+                Canvas1.Play("level_select_fade_out");
                 StartCoroutine(WaitForFadeLoad("CaveLevel"));
+            
             }
         }
     }
