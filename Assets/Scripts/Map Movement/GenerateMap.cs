@@ -62,7 +62,7 @@ public class GenerateMap : MonoBehaviour
             if (curNode == cave)
             {
                 Canvas1.Play("level_select_fade_out");
-                StartCoroutine(WaitForFadeLoad("CaveLevel"));
+                StartCoroutine(WaitForFadeLoad("3 doors"));
             
             }
         }

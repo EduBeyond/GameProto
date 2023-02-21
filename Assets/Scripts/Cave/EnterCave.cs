@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 using TMPro;
 
 public class EnterCave : MonoBehaviour
@@ -16,7 +17,7 @@ public class EnterCave : MonoBehaviour
     private static int correct;
     private static int mistakes = 0;
 
-    private List<string> answers = new List<string>{"sleep", "cat", "throw", "ball", "can", "say", "tree"};
+    private List<string> answers = new List<string>{ "ph", "ff", "ft", "gh", "ge", "ch", "mb" };
     [Header("Question Stuff")]
     public TMP_Text text;
     public GameObject textObject;
@@ -36,7 +37,9 @@ public class EnterCave : MonoBehaviour
             text.text = current;
             answers.Remove(current);
             GameObject clone = Instantiate(textObject);
+#if UNITY_EDITOR
             UnityEditor.GameObjectUtility.SetParentAndAlign(clone, canvas);
+#endif
             if (level == 0)
             {
                 clone.transform.position = new Vector3((290)+(250*i), 400, 0);
@@ -75,7 +78,7 @@ public class EnterCave : MonoBehaviour
                 level = cave/difficulty;
             }
 
-            SceneManager.LoadScene(level+3);
+            SceneManager.LoadScene(level+4);
             print("cave: " + cave);
             print("level: " + level);
         }

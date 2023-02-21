@@ -27,7 +27,9 @@ public class Questions : MonoBehaviour
             text.text = current;
             answers.Remove(current);
             GameObject clone = Instantiate(textObject);
+#if UNITY_EDITOR
             UnityEditor.GameObjectUtility.SetParentAndAlign(clone, canvas);
+#endif
             clone.transform.position = new Vector3((290-100*level)+(222*i), 425, 0);
         }
         
