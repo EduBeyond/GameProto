@@ -15,7 +15,7 @@ public class ship_fly_in : MonoBehaviour
     }
 
   private IEnumerator WaitForSceneLoad() {
-     yield return new WaitForSeconds(1.5f);
+     yield return new WaitForSeconds(2.2f);
      SceneManager.LoadScene("LevelSelect");
   }
 
@@ -26,7 +26,7 @@ public class ship_fly_in : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
         StartCoroutine(WaitForSceneLoad());
-        SM_Ship_Cruiser_03.SetTrigger("Space");
+        SM_Ship_Cruiser_03.Play("ship_fly_in");
         Canvas.Play("system_outro", 0, 2.10f);
         
         }
