@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GenerateMap : MonoBehaviour
 {
@@ -38,18 +39,25 @@ public class GenerateMap : MonoBehaviour
         bandit.right = bridge;
     }
 
+    private IEnumerator WaitForFadeLoad(string levelname)
+    {
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene(levelname);
+        
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (curNode == bandit)
             {
-                print("Enter Bandit Game");
+                StartCoroutine(WaitForFadeLoad("BanditMap"));
             }
 
             if (curNode == cave)
             {
-                print("Enter Cave Game");
+                StartCoroutine(WaitForFadeLoad("CaveLevel"));
             }
         }
     }
