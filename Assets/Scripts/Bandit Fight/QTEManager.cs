@@ -26,6 +26,8 @@ public class QTEManager : MonoBehaviour
     public bool submitted;
     public GameObject player;
     public GameObject enemy;
+    public Canvas winlose;
+    public TMP_Text winlosetxt;
 
     [HideInInspector]
     public bool isEventStarted;
@@ -39,7 +41,9 @@ public class QTEManager : MonoBehaviour
     private float smoothTimeUpdate;
     private float rememberTimeScale;
     public List<int> ansList = new List<int>();
+    // solList is fucked dont use it
     public List<int> solList = new List<int>();
+    public List<int> solList2 = new List<int>();
     private List<QTEKey> keys = new List<QTEKey>();
 
     public static System.Random rng = new System.Random();
@@ -47,6 +51,8 @@ public class QTEManager : MonoBehaviour
     public void Start()
     {
         submitButton.onClick.AddListener(delegate { submit(submitButton.GetComponent<CurQTE>().qte); });
+        winlose.enabled = false;
+        winlosetxt.enabled = false;
     }
 
     protected void Update()
@@ -165,14 +171,25 @@ public class QTEManager : MonoBehaviour
 
         bool correctAns = true;
 
-        for (int i = 0; i < solList.Count; i++)
+        foreach (int item in solList2)
         {
-            if (ansList.Count != solList.Count)
+            print("sol: " + item);
+        }
+
+        foreach (int item in ansList)
+        {
+            print("ans: " + item);
+        }
+
+
+        foreach (int item in ansList)
+        {
+            print(item);
+            if (!solList2.Contains(item))
             {
+                print("asdhlkasjlkdjslkj");
                 correctAns = false;
-                break;
             }
-            if (ansList[i] != solList[i]) { correctAns = false; }
         }
 
         FightOutcomes outcome = player.GetComponent<FightOutcomes>();
@@ -196,11 +213,14 @@ public class QTEManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("p");
         //if failed dodging
-        if (outcome.cur == 0) { outcome.dodged = false; }
+        if (outcome.cur == 0) { 
+            outcome.dodged = false;
+            print("nle");    
+        }
         //if failed initiating
         if (outcome.cur == 1) {
+            print("nle");
             outcome.initiated = false; 
         }
         outcome.hit = true;
@@ -210,6 +230,20 @@ public class QTEManager : MonoBehaviour
         outcome.over = true;
         doFinally();
         setHealth(hb, (int)hb.GetComponent<Slider>().value - 1);
+
+        print("sadhjkashaskhdskj" + ehb.value);
+        if (hb.value <= 0)
+        {
+            winlose.enabled = true;
+            winlosetxt.enabled = true;
+            winlosetxt.GetComponent<Text>().text = "You Lose!";
+        }
+        if (ehb.value <= 0)
+        {
+            winlose.enabled = true;
+            winlosetxt.enabled = true;
+            winlosetxt.GetComponent<Text>().text = "You Win!";
+        }
     }
 
 
@@ -270,17 +304,22 @@ public class QTEManager : MonoBehaviour
 
     protected List<Button> setupGUI(List<string> fragments, Transform parent)
     {
+        foreach (Transform child in fragPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in ansPanel)
+        {
+            Destroy(child.gameObject);
+        }
         var ui = getUI();
-
         Dictionary<string, int> answerDict = new Dictionary<string, int>();
         int count = 0;
         foreach (string fragment in fragments)
         {
             answerDict.Add(fragment, count);
-            solList.Add(count);
             count++;
         }
-        Shuffle(fragments);
         foreach (string fragment in fragments)
         {
             Button b = Instantiate(butPrefab, new Vector3(370, 130, 0), Quaternion.identity);

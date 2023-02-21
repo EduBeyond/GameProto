@@ -56,11 +56,15 @@ public class FightManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            outcome.ip = true;
+            l.Clear();
             l.Add("A");
             l.Add("B");
             l.Add("C");
-            question.GetComponent<TMP_Text>().text = GetQuestion().Item1;
+            (string, int) temp = GetQuestion();
+            question.GetComponent<TMP_Text>().text = temp.Item1;
+            manager.solList2.Clear();
+            manager.solList2.Add(temp.Item2);
 
             qte = GetQTEEvent(l, 5f, QTETimeType.Slow, pass.GetComponent<TMP_Text>());
 
@@ -88,10 +92,6 @@ public class FightManager : MonoBehaviour
             }
 
         }
-
-
-
-
     }
 
     IEnumerator fail()

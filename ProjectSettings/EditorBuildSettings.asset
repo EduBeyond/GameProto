@@ -15,6 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: ab1a5669594764047b9e77f2f8d115ed
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Caves/3 doors.unity
     guid: 6b4b80b239a4e544fa70b7e0047b04c9
   - enabled: 1
@@ -26,4 +27,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Caves/Exit.unity
     guid: 4ce1c8beadbd65a489d03b9db90bdf05
+=======
+    path: Assets/Scenes/BanditMap.unity
+    guid: 18dc0b0cd8b024518a8555082dc079cd
+  - enabled: 1
+    path: Assets/Scenes/CaveLevel.unity
+    guid: ec2e243f4e08d4abca7028ee28102489
+>>>>>>> 9b4b1a55d60e348cb87b4bdc015b530568544d30
   m_configObjects: {}
