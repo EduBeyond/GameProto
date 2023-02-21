@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: ab1a5669594764047b9e77f2f8d115ed
+  - enabled: 1
+    path: Assets/Scenes/Caves/3 doors.unity
+    guid: 6b4b80b239a4e544fa70b7e0047b04c9
+  - enabled: 1
+    path: Assets/Scenes/Caves/4 doors.unity
+    guid: d857e1d7e980e9e4aa2ebdd71b6e4892
+  - enabled: 1
+    path: Assets/Scenes/Caves/5 doors.unity
+    guid: cc346574115d19343939787f23f73b15
+  - enabled: 1
+    path: Assets/Scenes/Caves/Exit.unity
+    guid: 4ce1c8beadbd65a489d03b9db90bdf05
   m_configObjects: {}
