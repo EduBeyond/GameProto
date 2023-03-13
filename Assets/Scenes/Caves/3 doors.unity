@@ -1896,14 +1896,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9063bcbd43c76d4789e9a821b670bdb, type: 3}
   - {fileID: 8300000, guid: 88ec35dc3c473b54eaf37eff0f9060f1, type: 3}
   - {fileID: 8300000, guid: 6bea653cd5bbcc2419d3ee31b543f097, type: 3}
-  answers:
-  - ph
-  - ff
-  - ft
-  - gh
-  - ge
-  - ch
-  - mb
   used: []
   text: {fileID: 850823410356961846, guid: 3d9e124e57370f34eb1f58796693db2c, type: 3}
   textObject: {fileID: 5254422457062754721, guid: 3d9e124e57370f34eb1f58796693db2c, type: 3}
@@ -3547,8 +3539,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Click to play sound
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d0193a44fa310fe44832acf83f24ccdd, type: 2}
+  m_sharedMaterial: {fileID: -887576419047888000, guid: d0193a44fa310fe44832acf83f24ccdd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
